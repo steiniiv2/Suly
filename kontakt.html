@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teilnehmen – Person-to-Person BarDates</title>
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="left-nav">
+      <a href="index.html">Home</a>
+      <a href="kontakt.html">Teilnehmen</a>
+      <a href="info.html">Mehr erfahren</a>
+    </nav>
+    <h1>Jetzt teilnehmen</h1>
+  </header>
+
+  <main class="main-content">
+    <p class="lead-text">Wähle deine Stadt und fülle das Formular aus, um dabei zu sein.</p>
+
+    <!-- Städteauswahl -->
+    <form action="bezahlung.html" method="get" class="kontakt-formular" id="teilnahme-formular">
+      <label for="stadt">Stadt auswählen</label>
+      <select id="stadt" name="stadt" required>
+        <option value="" disabled selected>Bitte wählen</option>
+        <option value="berlin">Berlin</option>
+        <option value="hamburg">Hamburg</option>
+        <option value="muenchen">München</option>
+        <option value="koeln">Köln</option>
+        <option value="stuttgart">Stuttgart</option>
+        <option value="duesseldorf">Düsseldorf</option>
+      </select>
+
+      <!-- Weitere Felder -->
+      <label for="name">Dein Name</label>
+      <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+
+      <label for="email">E-Mail-Adresse</label>
+      <input type="email" id="email" name="email" placeholder="max@example.com" required />
+
+      <label for="nachricht">Nachricht (optional)</label>
+      <textarea id="nachricht" name="nachricht" rows="4" placeholder="Deine Nachricht..."></textarea>
+
+      <!-- Absenden Button -->
+      <div class="button-container">
+        <button type="submit" class="cta-button-main">Zur Bezahlung</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('teilnahme-formular').addEventListener('submit', function (e) {
+      const selectedCity = document.getElementById('stadt').value;
+      if (selectedCity) {
+        localStorage.setItem('ausgewaehlteStadt', selectedCity);
+      }
+    });
+  </script>
+
+</body>
+</html>

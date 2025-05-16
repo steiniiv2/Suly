@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bezahlung – Person-to-Person BarDates</title>
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="kontakt.html">Teilnehmen</a>
+      <a href="info.html">Mehr erfahren</a>
+    </nav>
+    <h1>Deine Anmeldung</h1>
+  </header>
+
+  <main class="main-content">
+    <p class="lead-text">Du hast folgende Stadt gewählt:</p>
+    <p id="stadt-ausgabe" style="font-size: 20px; font-weight: 600;"></p>
+
+    <div class="button-container">
+      <a href="#" class="cta-button">Zahlung starten</a>
+    </div>
+  </main>
+
+  <script>
+    const auswahl = localStorage.getItem('ausgewaehlteStadt');
+    const stadtName = {
+      berlin: "Berlin",
+      hamburg: "Hamburg",
+      muenchen: "München",
+      koeln: "Köln",
+      stuttgart: "Stuttgart",
+      duesseldorf: "Düsseldorf"
+    };
+
+    document.getElementById('stadt-ausgabe').textContent =
+      auswahl ? stadtName[auswahl] || auswahl : "Keine Stadt gewählt.";
+  </script>
+
+</body>
+</html>
