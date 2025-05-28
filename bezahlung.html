@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bezahlung – P2P BarDates</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script> <!-- Sandbox-ID -->
+</head>
+<body>
+  <header>
+    <nav class="left-nav">
+      <a href="index.html">Home</a>
+      <a href="kontakt.html">Teilnehmen</a>
+      <a href="info.html">Mehr erfahren</a>
+    </nav>
+    <h1>Bezahlung</h1>
+  </header>
+
+  <main class="main-content">
+    <p class="lead-text">Bitte wähle dein Ticket und bezahle sicher mit PayPal.</p>
+
+    <label for="ticket">Ticket-Auswahl</label>
+    <select id="ticket" required class="kontakt-formular">
+      <option value="" disabled selected>Bitte wählen</option>
+      <option value="19.00">Einzelticket – 19,00 €</option>
+      <option value="34.00">Freunde-Ticket – 34,00 €</option>
+      <option value="64.00">Gruppen-Ticket – 64,00 €</option>
+    </select>
+
+    <div id="paypal-button-container" class="button-container" style="margin-top: 30px;"></div>
+
+    <script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          const preis = document.getElementById("ticket").value;
+          if (!preis) {
+            alert("Bitte wähle zuerst ein Ticket aus.");
+            return;
+          }
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: preis
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Danke, ' + details.payer.name.given_name + '! Zahlung erfolgreich.');
+            window.location.href = "bestaetigung.html";
+          });
+        }
+      }).render('#paypal-button-container');
+    </script>
+  </main>
+</body>
+</html>
